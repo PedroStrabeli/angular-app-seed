@@ -5,30 +5,28 @@ module.exports = {
 		'app': './assets/app/main.ts'
 	},
 	resolve: {
-		extensions: ['.js', '.ts']
+		extensions: ['.js', '.ts', '.css']
 	},
 	module: {
-		loaders: [
-			{
-				test: /\.ts$/,
-				loaders: [
-					'awesome-typescript-loader',
-					'angular2-template-loader',
-					'angular2-router-loader'
-				]
-			},
+		rules: [
 			{
 				test: /\.html$/,
-				loaders: [
-					'html-loader'
-				]
+				// use: [{ loader: 'html-loader' }]
+				use: [{   loader: 'raw-loader' }]
 			},
 			{
 				test: /\.css$/,
-				loaders: [
-					'raw-loader'
-				]
+				use: [{ loader: 'raw-loader' }]
+			},
+			{
+			 	test: /\.pug$/,
+			  	use: [{ loader: 'html-loader' }, { loader: 'pug-html-loader' }]
+			},
+			{  
+			 	test: /\.styl$/,
+			  	use: [ { loader: 'raw-loader' }, { loader: 'stylus-loader' }]
 			}
-		]
+		],
+		exprContextCritical: false
 	}
 };
